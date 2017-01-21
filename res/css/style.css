@@ -1,0 +1,98 @@
+body {
+	margin: 0;
+	font-family: monospace;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+ul ul {
+	padding-left: 16px;
+}
+
+#editor {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 90%;
+}
+
+.image-view {
+	display: none;
+}
+
+#margin {
+	height: 100%;
+	display: inline-block;
+	vertical-align: top;
+	float: left;
+	padding-right: 8px;
+}
+
+#margin ol {
+	padding-left: 8px;
+	padding-right: 12px;
+	text-align: right;
+}
+
+#margin ol:first-child {
+  counter-reset: customlistcounter;
+}
+
+#margin ol > li {
+	counter-increment: customlistcounter;
+}
+
+#margin ol > li:before {
+  content: counter(customlistcounter);
+}
+
+#swift-post-img, #swift-post-link, #swift-post-text {
+	display: none;
+}
+
+/* Theme Monokai */
+.argument {
+	color: #BFA4A4;
+}
+.comment {
+	color: #75715E;
+}
+
+.default {
+	color: #F8F8F2;
+	background: #272822;
+}
+
+.func-name {
+	color: #a6e22e;
+}
+
+.number {
+	color: #AE81FF;
+}
+
+.keyword, .type {
+	color: #66D9EF;
+}
+
+.line-num {
+	color: #8D8D8A;
+}
+
+.operator {
+	color: #F92672;
+}
+
+.string {
+	color: #E6DB74;
+}
