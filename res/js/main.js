@@ -2,6 +2,7 @@
 var limit = 25;
 var langID = 0;
 var page = 1;
+var subreddit = getUrlVars()["sub"];
 var firstPID = "";
 var lastPID = "";
 
@@ -29,6 +30,12 @@ String.prototype.capitalize = function(){
 	return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
 };
 
+function addLines(lineCount) {
+	for(var i = 0; i < lineCount; i++) {
+		$("#margin ol").append("<li/>")
+	}
+}
+
 function clearCurrentPosts() {
 	$("#margin ol").empty();
 	$("#posts").empty();
@@ -45,7 +52,7 @@ function displayRedditPosts(posts) {
 					$(this).html(post.score);
 					break;
 				case "subreddit":
-					$(this).html("." + post.subreddit.toLowerCase());
+					$(this).html(".<a onclick=\"setSubreddit('" + post.subreddit + "')\">" + post.subreddit.toLowerCase() + "</a>");
 					break;
 				case "author":
 					$(this).html('"' + post.author + '"');
@@ -128,21 +135,32 @@ function getPostType(postID) {
 }
 
 function getRedditPosts(direction, callback) {
-	var getVar = "?limit=" + String(limit)
+	var sub = "";
+	var urlVars = "?limit=" + String(limit);
+	if (subreddit != undefined && subreddit != null && subreddit != "") {
+		sub += "/r/" + subreddit;
+	}
 	if (direction != undefined && direction != null) {
 		if (lastPID != undefined && lastPID != null && direction == "next") {
 			page++;
-			getVar += "&after=t3_" + lastPID;
+			urlVars += "&after=t3_" + lastPID;
 		} else if (firstPID != undefined && firstPID != null && direction == "prev" && page > 1) {
 			page--;
-			getVar += "&before=t3_" + firstPID;
+			urlVars += "&before=t3_" + firstPID;
 		}
 	}
-	console.log("https://www.reddit.com/r/starwarsmemes/.json" + getVar);
-	getJSONFrom("https://www.reddit.com/r/starwarsmemes/.json" + getVar, function (posts) {
+	getJSONFrom("https://www.reddit.com" + sub + "/.json" + urlVars, function (posts) {
 		callback(posts);
 		console.log(posts)
 	});
+}
+
+function getUrlVars() {
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		vars[key] = value;
+	});
+	return vars;
 }
 
 function isImgURL(url) {
@@ -169,10 +187,20 @@ function parseRedditPosts(obj) {
 	return posts
 }
 
-function addLines(lineCount) {
-	for(var i = 0; i < lineCount; i++) {
-		$("#margin ol").append("<li/>")
-	}
+function loadLanguage(languageID) {
+	var lanuageType = getLanguageType(languageID);
+	console.log("#" + lanuageType + "-header");
+	var header = $("#" + lanuageType + "header").clone();
+	header.removeAttr("id");
+	header.find(".field").each(function(){
+		switch($(this).attr("field")) {
+			case "donate-link":
+				header.attr("href", "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=helloworld%40austinerck%2ecom&lc=US&item_name=REditor&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+				break;
+		}
+	});
+	$("#header").empty();
+	$("#header").append(header);
 }
 
 function loadRedditPosts(direction) {
@@ -184,10 +212,16 @@ function loadRedditPosts(direction) {
 		});
 	});
 }
+
+function setSubreddit(sub) {
+	subreddit = sub;
+	loadRedditPosts();
+}
 	
 
 /*~~~~~~~~~~~~~~~~~~~~~~~ SCRIPT ~~~~~~~~~~~~~~~~~~~~~~*/
 $(function() {  
+	loadLanguage(langID);
 	loadRedditPosts("prev");
 
 	$("#prevPage").on("click", function(){
