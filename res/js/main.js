@@ -1,8 +1,9 @@
 /*~~~~~~~~~~~~~~~~~~~~ VARIABLES ~~~~~~~~~~~~~~~~~~~~*/
-var count = 25;
+var limit = 25;
 var langID = 0;
-var afterPID = "";
-var beforePID = "";
+var page = 1;
+var firstPID = "";
+var lastPID = "";
 
 /*~~~~~~~~~~~~~~~~~~~~~ CLASSES ~~~~~~~~~~~~~~~~~~~~~*/
 function Post(id, score, author, subreddit, title, url, text){
@@ -28,29 +29,16 @@ String.prototype.capitalize = function(){
 	return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
 };
 
+function clearCurrentPosts() {
+	$("#margin ol").empty();
+	$("#posts").empty();
+}
+
 function displayRedditPosts(posts) {
-	var prefix = "";
-	switch (langID) {
-		case 0:
-			prefix = "swift-"
-			break;
-	}
+	clearCurrentPosts();
 	for (i = 0; i < posts.length; i++) { 
-		var post = posts[i];
-		var postType = "";
-		switch (post.type) {
-			case 0:
-				postType = "post-img"
-				break;
-			case 1:
-				postType = "post-text"
-				break;
-			case 2:
-				postType = "post-link"
-				break;
-		}
-		var postElement = $("#" + prefix + postType).clone()
-		postElement.removeAttr("id")
+		var post = posts[i];		
+		var postElement = getPostElement(langID, post.type);
 		postElement.find(".field").each(function(){
 			switch($(this).attr("field")) {
 				case "score":
@@ -66,7 +54,7 @@ function displayRedditPosts(posts) {
 					$(this).html('"' + post.title + '"');
 					break;
 				case "small-title":
-					$(this).html(post.title.capitalize().replace(/\W|_/g, '').substring(0, 25))
+					$(this).html(post.title.capitalize().replace(/\W|_/g, '').substring(0, 25));
 					break;
 				case "text":
 					if(post.type == 1) {
@@ -82,35 +70,78 @@ function displayRedditPosts(posts) {
 					break;
 				case "image":
 					if(post.type == 0) {
-						$(this).attr("uuid", post.id)
-						$(this).attr("src", post.url)
+						$(this).attr("uuid", post.id);
+						$(this).attr("src", post.url);
 					}
 					break;
+				default:
+					console.log("Unknown field '" + (this).attr("field") + "' found on post type '" + getPostID(langID, post.type) + "'");
+					$(this).html("Unknown Field");
 			}
 		});
-		$("#editor").append(postElement);
-	
+		addLines(postElement.find("li").length)
+		$("#posts").append(postElement);
 	}	
 }
 
 function getJSONFrom(url, callback) {
 	$.getJSON(url, function(data) {
-    callback(data);
-    return data;
+    	callback(data);
+    	return data;
 	});
 }
 
-function getRedditPosts(callback) {
-	var getString = "?count=" + String(count)
-	if (afterPID != undefined && afterPID != "") {
-		getString += "&after=" + afterPID
+function getLanguageType(languageID) {
+	switch (languageID) {
+		case 0:
+			return "swift-";
+			break;
+		default:
+			return "swift-";
 	}
-	if (beforePID != undefined && beforePID != "") {
-		getString += "&before=" + beforePID
+}
+
+function getPostElement(languageID, postID) {
+	var element =  $("#" + getPostID(languageID, postID)).clone();
+	$("#posts").append(element);
+	return element;
+}
+
+function getPostID(languageID, postID) {
+	return getLanguageType(languageID) + getPostType(postID);
+}
+
+function getPostType(postID) {
+	switch (postID) {
+		case 0:
+			return "post-img";
+			break;
+		case 1:
+			return "post-text";
+			break;
+		case 2:
+			return "post-link";
+			break;
+		default:
+			return "post-text";
 	}
-	getJSONFrom("http://www.reddit.com/.json" + getString, function (posts) {
+}
+
+function getRedditPosts(direction, callback) {
+	var getVar = "?limit=" + String(limit)
+	if (direction != undefined && direction != null) {
+		if (lastPID != undefined && lastPID != null && direction == "next") {
+			page++;
+			getVar += "&after=t3_" + lastPID;
+		} else if (firstPID != undefined && firstPID != null && direction == "prev" && page > 1) {
+			page--;
+			getVar += "&before=t3_" + firstPID;
+		}
+	}
+	console.log("https://www.reddit.com/r/starwarsmemes/.json" + getVar);
+	getJSONFrom("https://www.reddit.com/r/starwarsmemes/.json" + getVar, function (posts) {
 		callback(posts);
-		return posts
+		console.log(posts)
 	});
 }
 
@@ -133,21 +164,21 @@ function parseRedditPosts(obj) {
 		var postObj = new Post(id, score, author, subreddit, title, url, text)
 		posts.push(postObj)
 	}
+	firstPID = posts[0].id
+	lastPID = posts[posts.length - 1].id
 	return posts
 }
 
-function updateLineCount() {
-	for(var i = 0; i < 2000; i++) {
+function addLines(lineCount) {
+	for(var i = 0; i < lineCount; i++) {
 		$("#margin ol").append("<li/>")
 	}
 }
 
-function updateRedditPosts() {
-	getRedditPosts(function(jsonPosts) {
+function loadRedditPosts(direction) {
+	getRedditPosts(direction, function(jsonPosts) {
 		var posts = parseRedditPosts(jsonPosts);
 		displayRedditPosts(posts);
-		afterPID = jsonPosts["data"]["after"];
-		beforePID = jsonPosts["data"]["before"];	
 		$(".image-link").on("click", function(){
 			$(".image-view[uuid='" + $(this).attr("uuid") + "']").toggle();
 		});
@@ -157,6 +188,12 @@ function updateRedditPosts() {
 
 /*~~~~~~~~~~~~~~~~~~~~~~~ SCRIPT ~~~~~~~~~~~~~~~~~~~~~~*/
 $(function() {  
-	updateRedditPosts()
-	updateLineCount()
+	loadRedditPosts("prev");
+
+	$("#prevPage").on("click", function(){
+		loadRedditPosts("prev");
+	});
+	$("#nextPage").on("click", function(){
+		loadRedditPosts("next");
+	});
 });

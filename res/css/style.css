@@ -1,6 +1,7 @@
 body {
 	margin: 0;
 	font-family: monospace;
+	line-height: 1.2em;
 }
 
 a {
@@ -56,7 +57,7 @@ ul ul {
   content: counter(customlistcounter);
 }
 
-#swift-post-img, #swift-post-link, #swift-post-text {
+#templates {
 	display: none;
 }
 
