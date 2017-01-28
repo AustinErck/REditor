@@ -6,6 +6,9 @@ var subreddit = getUrlVars()["sub"];
 var firstPID = "";
 var lastPID = "";
 
+/*~~~~~~~~~~~~~~~~~~~~ CONTANTS ~~~~~~~~~~~~~~~~~~~~~*/
+var LANUAGE_COUNT = 3;
+
 /*~~~~~~~~~~~~~~~~~~~~~ CLASSES ~~~~~~~~~~~~~~~~~~~~~*/
 function Post(id, score, author, subreddit, title, url, text){
 	this.id = id
@@ -102,6 +105,12 @@ function getLanguageType(languageID) {
 	switch (languageID) {
 		case 0:
 			return "swift-";
+			break;
+		case 1:
+			return "python-";
+			break;
+		case 2:
+			return "php-"
 			break;
 		default:
 			return "swift-";
@@ -201,6 +210,14 @@ function loadLanguage(languageID) {
 	});
 	$("#header").empty();
 	$("#header").append(header);
+	$(".language-toggle").on("click", function(){
+		langID++;
+		if(langID >= LANUAGE_COUNT) {
+			langID = 0;
+		}
+		loadLanguage(langID);
+		loadRedditPosts();
+	});
 }
 
 function loadRedditPosts(direction) {

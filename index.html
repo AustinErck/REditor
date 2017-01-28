@@ -27,18 +27,19 @@
 		<div id="templates">
 			<div id="swift">
 				<ul id="swift-header">
-					<li><span class="operator">import</span> <a class="field" field="donate-link">BuyMe.aCoffee</a></li>
+					<li><span class="import">import</span> <a class="field" field="donate-link">donate</a></li>
+					<li><span class="type">var</span> lanuage: <span class="type">String</span> <span class="operator">=</span> <span class="string">"<a class="language-toggle">swift</a>"</span></li>
 				</ul>
 				<div id="swift-post">
 					<div id="swift-post-img" class="post">
 						<ul>
 							<li><span class="keyword">func</span> <span class="func-name field" field="small-title">ImagePostNameGoesH</span>() {</li>
 							<ul>
-								<li>score: <span class="type">Int</span> = <span class="number field" field="score">0</span></li>
-								<li>sub: <span class="type">Sub</span> = <span class="number field" field="subreddit">.unknown</span></li>
-								<li>author: <span class="type">String</span> = <span class="string field" field="author">"UnknownAuthor"</span></li>
-								<li>title: <span class="type">String</span> = <span class="string field" field="full-title">"Missing Post Name"</span></li>
-								<li>image: <span class="type">UIImage</span> = <span class="type">UIImage</span>(path: <span class="string field" field="url">""</span>)</li>
+								<li><span class="type">var</span> score: <span class="type">Int</span> <span class="operator">=</span> <span class="number field" field="score">0</span></li>
+								<li><span class="type">var</span> sub: <span class="type">Sub</span> <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span></li>
+								<li><span class="type">var</span> author: <span class="type">String</span> <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span></li>
+								<li><span class="type">var</span> title: <span class="type">String</span> <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span></li>
+								<li><span class="type">var</span> image: <span class="type">UIImage</span> <span class="operator">=</span> <span class="type">UIImage</span>(path: <span class="string field" field="url">""</span>)</li>
 								<li><img class="image-view field" field="image"/></li>
 								<!--<li>&nbsp;</li>
 								<li><span class="operator">for</span> comment <span class="operator">in</span> <span class="number">1</span>...<span class="number">999</span> {</li>
@@ -55,10 +56,10 @@
 								<li class="comment">/*</li>
 								<li class="comment field" field="text">Post Text goes here if it exists</li>
 								<li class="comment">*/</li>
-								<li>score: <span class="type">Int</span> = <span class="number field" field="score">0</span></li>
-								<li>sub: <span class="type">Sub</span> = <span class="number field" field="subreddit">.unknown</span></li>
-								<li>author: <span class="type">String</span> = <span class="string field" field="author">"UnknownAuthor"</span></li>
-								<li>title: <span class="type">String</span> = <span class="string field" field="full-title">"Missing Post Name"</span></li>
+								<li><span class="type">var</span> score: <span class="type">Int</span> <span class="operator">=</span> <span class="number field" field="score">0</span></li>
+								<li><span class="type">var</span> sub: <span class="type">Sub</span> <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span></li>
+								<li><span class="type">var</span> author: <span class="type">String</span> <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span></li>
+								<li><span class="type">var</span> title: <span class="type">String</span> <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span></li>
 							</ul>
 							<li>}</li>
 							<li/>
@@ -68,11 +69,121 @@
 						<ul>
 							<li><span class="keyword">func</span> <span class="func-name field" field="small-title">LinkPostNameGoesH</span>() {</li>
 							<ul>
-								<li>score: <span class="type">Int</span> = <span class="number field" field="score">0</span></li>
-								<li>sub: <span class="type">Sub</span> = <span class="number field" field="subreddit">.unknown</span></li>
-								<li>author: <span class="type">String</span> = <span class="string field" field="author">"UnknownAuthor"</span></li>
-								<li>title: <span class="type">String</span> = <span class="string field" field="full-title">"Missing Post Name"</span></li>
-								<li>link: <span class="type">URL</span> = <span class="type">URL</span>(<span class="string field" field="url">""</span>)</li>
+								<li><span class="type">var</span> score: <span class="type">Int</span> <span class="operator">=</span> <span class="number field" field="score">0</span></li>
+								<li><span class="type">var</span> sub: <span class="type">Sub</span> <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span></li>
+								<li><span class="type">var</span> author: <span class="type">String</span> <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span></li>
+								<li><span class="type">var</span> title: <span class="type">String</span> <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span></li>
+								<li><span class="type">var</span> link: <span class="type">URL</span> <span class="operator">=</span> <span class="type">URL</span>(<span class="string field" field="url">""</span>)</li>
+							</ul>
+							<li>}</li>
+							<li/>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="python">
+				<ul id="python-header">
+					<li><span class="import">import</span> <a class="field" field="donate-link">donate</a></li>
+					<li>lanuage <span class="operator">=</span> <span class="string">"<a class="language-toggle">python</a>"</span></li>
+				</ul>
+				<div id="python-post">
+					<div id="python-post-img" class="post">
+						<ul>
+							<li><span class="keyword">def</span> <span class="func-name field" field="small-title">ImagePostNameGoesH</span>():</li>
+							<ul>
+								<li>score <span class="operator">=</span> <span class="number field" field="score">0</span></li>
+								<li>sub <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span></li>
+								<li>author <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span></li>
+								<li>title <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span></li>
+								<li>image <span class="operator">=</span> <span class="type">urlparse</span>(path: <span class="string field" field="url">""</span>)</li>
+								<li><img class="image-view field" field="image"/></li>
+								<!--<li>&nbsp;</li>
+								<li><span class="operator">for</span> comment <span class="operator">in</span> <span class="number">1</span>...<span class="number">999</span> {</li>
+								<li>}</li>-->
+							</ul>
+							<li/>
+						</ul>
+					</div>
+					<div id="python-post-text" class="post">
+						<ul>
+							<li><span class="keyword">def</span> <span class="func-name field" field="small-title">TextPostNameGoesHe</span>():</li>
+							<ul>
+								<li class="comment">###</li>
+								<li class="comment field" field="text">Post Text goes here if it exists</li>
+								<li class="comment">###</li>
+								<li>score <span class="operator">=</span> <span class="number field" field="score">0</span></li>
+								<li>sub <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span></li>
+								<li>author <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span></li>
+								<li>title <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span></li>
+							</ul>
+							<li/>
+						</ul>
+					</div>
+					<div id="python-post-link" class="post">
+						<ul>
+							<li><span class="keyword">def</span> <span class="func-name field" field="small-title">LinkPostNameGoesH</span>():</li>
+							<ul>
+								<li>score <span class="operator">=</span> <span class="number field" field="score">0</span></li>
+								<li>sub <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span></li>
+								<li>author <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span></li>
+								<li>title <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span></li>
+								<li>link <span class="operator">=</span> <span class="type">urlparse</span>(<span class="string field" field="url">""</span>)</li>
+							</ul>
+							<li/>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="php">
+				<ul id="php-header">
+					<li><?php</li>
+					<li><span class="import">require</span> '<a class="string field" field="donate-link">donate</a>';</li>
+					<li>$language <span class="operator">=</span> <span class="string">"<a class="language-toggle">php</a>"</span>;</li>
+				</ul>
+				<div id="php-post">
+					<div id="php-post-img" class="post">
+						<ul>
+							<li><span class="keyword">function</span> <span class="func-name field" field="small-title">ImagePostNameGoesH</span>() {</li>
+							<ul>
+								<li>$score <span class="operator">=</span> <span class="number field" field="score">0</span>;</li>
+								<li>$sub <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span>;</li>
+								<li>$author <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span>;</li>
+								<li>$title <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span>;</li>
+								<li>$image <span class="operator">=</span> <span class="type">parse_url</span>(path: <span class="string field" field="url">""</span>);</li>
+								<li><img class="image-view field" field="image"/></li>
+								<!--<li>&nbsp;</li>
+								<li><span class="operator">for</span> comment <span class="operator">in</span> <span class="number">1</span>...<span class="number">999</span> {</li>
+								<li>}</li>-->
+							</ul>
+							<li>}</li>
+							<li/>
+						</ul>
+					</div>
+					<div id="php-post-text" class="post">
+						<ul>
+							<li><span class="keyword">function</span> <span class="func-name field" field="small-title">TextPostNameGoesHe</span>() {</li>
+							<ul>
+								<li class="comment">/*</li>
+								<li class="comment field" field="text">Post Text goes here if it exists</li>
+								<li class="comment">*/</li>
+								<li>$score <span class="operator">=</span> <span class="number field" field="score">0</span>;</li>
+								<li>$sub <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span>;</li>
+								<li>$author <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span>;</li>
+								<li>$title <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span>;</li>
+							</ul>
+							<li>}</li>
+							<li/>
+						</ul>
+					</div>
+					<div id="php-post-link" class="post">
+						<ul>
+							<li><span class="keyword">function</span> <span class="func-name field" field="small-title">LinkPostNameGoesH</span>() {</li>
+							<ul>
+								<li>$score <span class="operator">=</span> <span class="number field" field="score">0</span>;</li>
+								<li>$sub <span class="operator">=</span> <span class="number field" field="subreddit">.unknown</span>;</li>
+								<li>$author <span class="operator">=</span> <span class="string field" field="author">"UnknownAuthor"</span>;</li>
+								<li>$title <span class="operator">=</span> <span class="string field" field="full-title">"Missing Post Name"</span>;</li>
+								<li>$link <span class="operator">=</span> <span class="type">parse_url</span>(<span class="string field" field="url">""</span>);</li>
 							</ul>
 							<li>}</li>
 							<li/>
